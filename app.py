@@ -4,11 +4,9 @@ from pydantic import BaseModel
 
 app = Flask(__name__)
 
-@app.route('/profane', methods=['POST'])
-def profane():
-    # Get the user's mood from the request parameters
-    sentence = request.form.get('text')
-    output = profanity.censor(sentence)
+@app.route('/profane/<text>', methods=['GET'])
+def profane(text):
+    output = profanity.censor(text)
     return jsonify({'cleantext': output})
 
 
